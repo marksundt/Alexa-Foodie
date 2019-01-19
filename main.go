@@ -11,17 +11,24 @@ import (
 func DispatchIntents(request alexa.Request) alexa.Response {
 	//var response alexa.Response
 	var speechtext string
+	var ssmltext string
+
 	log.Println("***request***")
 	spew.Dump(request)
 
-	if(request.body.session.new) {
-		speechtext = "Welcome to Foodie"
+	// Need new NewSimpleResponse for the SSML responce **** 
+	if(request.Body.Type == "LaunchRequest") {
+		ssmltext = "<speak><prosody pitch=\"high\">Launch Request Yaaa!</prosody></speak>"
+		speechtext = ""
 	}
-	switch request.Body.Intent.Name {
-	default:
-		speechtext = "You ended up in defaut"
+	if(request.Session.New) {
+		speechtext = speechtext + " Welcome to Foodie"
 	}
-	return alexa.NewSimpleResponse("Dispatch", speechtext)
+	//switch request.Body.Intent.Name {
+	//default:
+	//	speechtext = "You ended up in defaut"
+	//}
+	return alexa.NewSimpleResponse("Dispatch", speechtext, ssmltext)
 }
 
 // Handler is the lambda hander
