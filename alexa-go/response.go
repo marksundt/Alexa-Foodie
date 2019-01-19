@@ -1,13 +1,14 @@
 package alexa
 
 //NewSimpleResponse builds a session response
-func NewSimpleResponse(title string, text string) Response {
+func NewSimpleResponse(title string, text string, ssmltext string) Response {
 	r := Response{
 		Version: "1.0",
 		Body: ResBody{
 			OutputSpeech: &Payload{
-				Type: "PlainText",
+				Type: "SSML",
 				Text: text,
+				SSML: ssmltext,
 			},
 			Card: &Payload{
 				Type:    "Simple",

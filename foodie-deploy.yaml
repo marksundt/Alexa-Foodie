@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  foodielambda:
+    Properties:
+      CodeUri: s3://msundt.foodie/8412a61e213780c8bb6a0ee2689a7106
+      Environment:
+        Variables:
+          S3_BUCKET: msundt.foodie
+      Handler: main
+      Runtime: go1.x
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
